@@ -1,0 +1,1955 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nurudeen Osikpemhi Hassan — Senior Fullstack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0e12;
+        --bg-panel: #12161c;
+        --bg-panel-alt: #171b22;
+        --border: #242b33;
+        --border-hover: #3a4552;
+        --text-primary: #edeff2;
+        --text-secondary: #8b96a3;
+        --text-tertiary: #5b6570;
+        --amber: #f5a623;
+        --amber-dim: rgba(245, 166, 35, 0.12);
+        --green: #35c56a;
+        --green-dim: rgba(53, 197, 106, 0.12);
+        --red: #f0553f;
+        --red-dim: rgba(240, 85, 63, 0.12);
+        --radius: 8px;
+        --grid-line: rgba(255, 255, 255, 0.035);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        background-image:
+          linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        background-size: 48px 48px;
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      .mono {
+        font-family: "Inter", sans-serif;
+      }
+
+      ::selection {
+        background: var(--amber-dim);
+        color: var(--amber);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      a {
+        color: inherit;
+      }
+
+      img,
+      svg {
+        max-width: 100%;
+      }
+
+      /* ---------- status dot ---------- */
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 0 rgba(53, 197, 106, 0.6);
+        animation: pulse 2.2s infinite;
+        flex-shrink: 0;
+      }
+
+      .dot.amber {
+        background: var(--amber);
+        box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.6);
+        animation: pulse-amber 2.2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(53, 197, 106, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 7px rgba(53, 197, 106, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(53, 197, 106, 0);
+        }
+      }
+
+      @keyframes pulse-amber {
+        0% {
+          box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.55);
+        }
+        70% {
+          box-shadow: 0 0 0 7px rgba(245, 166, 35, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(245, 166, 35, 0);
+        }
+      }
+
+      /* ---------- nav / status bar ---------- */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(11, 14, 18, 0.85);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 1.1rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .logo {
+        font-family: "Inter", sans-serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+      }
+
+      .status-chip {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .status-chip span.state {
+        color: var(--green);
+      }
+
+      #nav-uptime {
+        color: var(--text-tertiary);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.25rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-family: "Inter", sans-serif;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--amber);
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 34px;
+        height: 34px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        flex-shrink: 0;
+        padding: 0;
+      }
+
+      .nav-toggle span {
+        display: block;
+        width: 16px;
+        height: 2px;
+        margin: 0 auto;
+        background: var(--text-secondary);
+        transition:
+          transform 0.2s ease,
+          opacity 0.2s ease;
+      }
+
+      .nav-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      @media (max-width: 860px) {
+        .status-chip {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .nav-toggle {
+          display: flex;
+        }
+
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          gap: 0;
+          background: rgba(11, 14, 18, 0.97);
+          border-bottom: 1px solid var(--border);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.25s ease;
+        }
+
+        .nav-links.open {
+          max-height: 420px;
+        }
+
+        .nav-links li {
+          border-top: 1px solid var(--border);
+        }
+
+        .nav-links a {
+          display: block;
+          padding: 0.9rem 1.5rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .nav-inner {
+          padding: 1rem 1.5rem;
+        }
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 8rem 3rem 4rem;
+        position: relative;
+      }
+
+      .hero-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 3rem;
+        align-items: end;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green);
+        padding: 0.35rem 0.7rem;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        background: var(--bg-panel);
+        margin-bottom: 1.75rem;
+        opacity: 0;
+        animation: fadeInUp 0.7s ease-out 0.15s forwards;
+      }
+
+      .hero-title {
+        font-family: "Inter", sans-serif;
+        font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.6rem;
+        opacity: 0;
+        animation: fadeInUp 0.7s ease-out 0.3s forwards;
+      }
+
+      .hero-title .accent {
+        color: var(--amber);
+      }
+
+      .hero-description {
+        font-size: 1.08rem;
+        color: var(--text-secondary);
+        max-width: 540px;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.7s ease-out 0.45s forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeInUp 0.7s ease-out 0.6s forwards;
+      }
+
+      .btn {
+        padding: 0.85rem 1.6rem;
+        border-radius: var(--radius);
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: 1px solid transparent;
+      }
+
+      .btn-primary {
+        background: var(--amber);
+        color: #17110a;
+      }
+
+      .btn-primary:hover {
+        background: #ffb64a;
+        transform: translateY(-2px);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border-color: var(--border);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+      }
+
+      /* hero status panel — the signature piece */
+      .status-panel {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        opacity: 0;
+        animation: fadeInUp 0.7s ease-out 0.5s forwards;
+      }
+
+      .status-panel-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--border);
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-tertiary);
+      }
+
+      .status-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.55rem 0;
+        font-family: "Inter", sans-serif;
+        font-size: 0.82rem;
+        gap: 0.75rem;
+      }
+
+      .status-row + .status-row {
+        border-top: 1px solid var(--border);
+      }
+
+      .status-row .label {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        color: var(--text-secondary);
+      }
+
+      .status-row .value {
+        color: var(--text-primary);
+        font-weight: 500;
+        text-align: right;
+      }
+
+      .status-row .value.green {
+        color: var(--green);
+      }
+
+      .status-row .value.amber {
+        color: var(--amber);
+      }
+
+      /* ---------- sections ---------- */
+      section {
+        padding: 6.5rem 3rem;
+        position: relative;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .section-header {
+        margin-bottom: 3.5rem;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1.5rem;
+      }
+
+      .section-tag {
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        color: var(--amber);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.6rem;
+        display: block;
+      }
+
+      .section-title {
+        font-family: "Inter", sans-serif;
+        font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .section-note {
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        color: var(--text-tertiary);
+      }
+
+      /* ---------- skills / service grid ---------- */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .skill-card {
+        background: var(--bg-panel);
+        padding: 1.75rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease;
+        min-width: 0;
+      }
+
+      .skill-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+      }
+
+      .skill-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 0.9rem;
+        flex-wrap: wrap;
+      }
+
+      .skill-title {
+        font-family: "Inter", sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .skill-badge {
+        font-family: "Inter", sans-serif;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.25rem 0.55rem;
+        border-radius: 100px;
+        white-space: nowrap;
+      }
+
+      .skill-badge.green {
+        color: var(--green);
+        background: var(--green-dim);
+      }
+
+      .skill-badge.amber {
+        color: var(--amber);
+        background: var(--amber-dim);
+      }
+
+      .skill-description {
+        color: var(--text-secondary);
+        font-size: 0.88rem;
+        line-height: 1.65;
+        margin-bottom: 1.3rem;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+      }
+
+      .tech-tag {
+        padding: 0.32rem 0.65rem;
+        background: var(--bg-panel-alt);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+      }
+
+      /* featured observability panel */
+      .obs-panel {
+        grid-column: 1 / -1;
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.75rem;
+      }
+
+      .obs-panel .skill-head {
+        margin-bottom: 1.4rem;
+      }
+
+      .obs-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1px;
+        background: var(--border);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 1.4rem;
+      }
+
+      .obs-metric {
+        background: var(--bg-panel-alt);
+        padding: 1.1rem 1.3rem;
+        min-width: 0;
+      }
+
+      .obs-metric .metric-label {
+        font-family: "Inter", sans-serif;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-tertiary);
+        margin-bottom: 0.5rem;
+      }
+
+      .obs-metric .metric-value {
+        font-family: "Inter", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .obs-metric .metric-value.green {
+        color: var(--green);
+      }
+
+      .obs-metric .metric-value.amber {
+        color: var(--amber);
+      }
+
+      .sparkline {
+        display: block;
+        margin-top: 0.6rem;
+      }
+
+      /* ---------- projects (deployed services) ---------- */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.25rem;
+      }
+
+      .project-card {
+        background: var(--bg-panel);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .project-card:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-4px);
+      }
+
+      .project-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.9rem 1.4rem;
+        background: var(--bg-panel-alt);
+        border-bottom: 1px solid var(--border);
+        font-family: "Inter", sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--green);
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .project-topbar .status-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .project-content {
+        padding: 1.6rem 1.4rem 1.8rem;
+      }
+
+      .project-title {
+        font-family: "Inter", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+      }
+
+      .project-description {
+        color: var(--text-secondary);
+        font-size: 0.87rem;
+        margin-bottom: 1.4rem;
+        line-height: 1.65;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .project-link {
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+      }
+
+      .project-link:hover {
+        border-color: var(--amber);
+        color: var(--amber);
+      }
+
+      /* ---------- CI/CD pipeline (testing) ---------- */
+      .pipeline {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        margin-bottom: 3rem;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .pipeline-stage {
+        flex: 1;
+        min-width: 130px;
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        padding: 1.1rem 1rem;
+        position: relative;
+        text-align: center;
+      }
+
+      .pipeline-stage:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -0.85rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-tertiary);
+        font-family: "Inter", sans-serif;
+        z-index: 2;
+        background: var(--bg);
+        width: 1.6rem;
+      }
+
+      .pipeline-stage .stage-icon {
+        color: var(--green);
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .pipeline-stage .stage-label {
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      /* ---------- contact ---------- */
+      .contact-panel {
+        background: var(--bg-panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 3.5rem 3rem;
+        text-align: center;
+      }
+
+      .contact-title {
+        font-family: "Inter", sans-serif;
+        font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+        font-weight: 700;
+        margin-bottom: 1.3rem;
+        letter-spacing: -0.01em;
+      }
+
+      .contact-description {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        margin-bottom: 2.5rem;
+        max-width: 620px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.75;
+      }
+
+      .contact-methods {
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+      }
+
+      .contact-method {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.85rem 1.4rem;
+        background: var(--bg-panel-alt);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        transition: border-color 0.2s ease;
+        word-break: break-word;
+      }
+
+      .contact-method:hover {
+        border-color: var(--green);
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .social-link {
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-panel-alt);
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        text-decoration: none;
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+      }
+
+      .social-link:hover {
+        border-color: var(--amber);
+        color: var(--amber);
+        transform: translateY(-3px);
+      }
+
+      footer {
+        padding: 2.5rem 3rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+        color: var(--text-tertiary);
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+      }
+
+      /* ---------- fade-in on scroll ---------- */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ---------- responsive ---------- */
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero {
+          padding: 7rem 1.5rem 3rem;
+          min-height: auto;
+        }
+        section {
+          padding: 4rem 1.25rem;
+        }
+        .contact-panel {
+          padding: 2.5rem 1.25rem;
+        }
+        .cta-buttons {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .cta-buttons .btn {
+          width: 100%;
+        }
+        .obs-metrics {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .edu-cert-grid {
+          grid-template-columns: 1fr;
+        }
+        .section-header {
+          margin-bottom: 2.5rem;
+        }
+        .contact-method {
+          font-size: 0.78rem;
+          padding: 0.7rem 1rem;
+        }
+        .exp-topbar,
+        .project-topbar {
+          font-size: 0.65rem;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .obs-metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ---------- experience (process history) ---------- */
+      .exp-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .exp-item {
+        background: var(--bg-panel);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .exp-item:hover {
+        border-color: var(--border-hover);
+        transform: translateY(-2px);
+      }
+
+      .exp-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.9rem 1.4rem;
+        background: var(--bg-panel-alt);
+        border-bottom: 1px solid var(--border);
+        font-family: "Inter", sans-serif;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--green);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .exp-body {
+        padding: 1.6rem 1.4rem 1.8rem;
+      }
+
+      .exp-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .exp-role {
+        font-family: "Inter", sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .exp-company {
+        font-family: "Inter", sans-serif;
+        font-size: 0.8rem;
+        color: var(--amber);
+      }
+
+      .exp-location {
+        font-family: "Inter", sans-serif;
+        font-size: 0.75rem;
+        color: var(--text-tertiary);
+        margin-bottom: 1rem;
+      }
+
+      .exp-bullets {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .exp-bullets li {
+        position: relative;
+        padding-left: 1.2rem;
+        color: var(--text-secondary);
+        font-size: 0.87rem;
+        line-height: 1.65;
+      }
+
+      .exp-bullets li::before {
+        content: "›";
+        position: absolute;
+        left: 0;
+        color: var(--green);
+        font-family: "Inter", sans-serif;
+      }
+
+      /* ---------- education & certifications ---------- */
+      .edu-cert-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+      }
+
+      .edu-item {
+        padding: 1.1rem 0;
+      }
+
+      .edu-item + .edu-item {
+        border-top: 1px solid var(--border);
+      }
+
+      .edu-degree {
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+
+      .edu-meta {
+        font-family: "Inter", sans-serif;
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+      }
+
+      .edu-meta .sep {
+        color: var(--text-tertiary);
+      }
+
+      .cert-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.7rem;
+        padding: 0.7rem 0;
+        font-size: 0.87rem;
+        color: var(--text-secondary);
+      }
+
+      .cert-item + .cert-item {
+        border-top: 1px solid var(--border);
+      }
+
+      .cert-item .dot {
+        margin-top: 0.45rem;
+      }
+
+      .cert-item strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      @media (max-width: 780px) {
+        .edu-cert-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-inner">
+        <div class="logo">
+          Nurudeen<span class="mono" style="color: var(--amber)"> </span>Hassan
+        </div>
+        <div class="status-chip">
+          <span class="dot"></span>
+          <span class="state">All systems operational</span>
+          <!-- <span id="nav-uptime">· uptime 00:00:00</span> -->
+        </div>
+        <button
+          class="nav-toggle"
+          id="nav-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="nav-links"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">home</a></li>
+          <li><a href="#experience">experience</a></li>
+          <li><a href="#skills">skills</a></li>
+          <li><a href="#projects">projects</a></li>
+          <li><a href="#testing">testing</a></li>
+          <li><a href="#contact">contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section id="home" class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">
+            <span class="dot"></span> Available for new builds
+          </div>
+          <h1 class="hero-title">
+            Systems that stay<br />
+            <span class="accent">up, observable, and shipped.</span>
+          </h1>
+          <p class="hero-description">
+            Senior Software Engineer with 9+ years shipping fullstack products
+            end to end — from React/Angular interfaces to Django and Node/Nest
+            APIs — and instrumenting every layer so issues surface before users
+            ever see them.
+          </p>
+          <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">View deployed work</a>
+            <a href="#contact" class="btn btn-secondary">Get in touch</a>
+          </div>
+        </div>
+
+        <div class="status-panel">
+          <!-- <div class="status-panel-head">
+            <span>service_status.log</span>
+            <span id="hero-clock">--:--:--</span>
+          </div> -->
+          <div class="status-row">
+            <span class="label"><span class="dot"></span>Frontend</span>
+            <span class="value green">Operational</span>
+          </div>
+          <div class="status-row">
+            <span class="label"><span class="dot"></span>API / Backend</span>
+            <span class="value green">Operational</span>
+          </div>
+          <div class="status-row">
+            <!-- <span class="label"
+              ><span class="dot amber"></span>Deploys this month</span
+            > -->
+            <!-- <span class="value amber">14</span> -->
+          </div>
+          <!-- <div class="status-row">
+            <span class="label"><span class="dot"></span>Avg. response</span>
+            <span class="value">118ms</span>
+          </div> -->
+          <div class="status-row">
+            <span class="label"
+              ><span class="dot"></span>Years in production</span
+            >
+            <span class="value">9+</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-header fade-in">
+        <div>
+          <span class="section-tag">// Process history</span>
+          <h2 class="section-title">Professional Experience</h2>
+        </div>
+        <span class="section-note">4 roles · 9+ years</span>
+      </div>
+
+      <div class="exp-list">
+        <div class="exp-item fade-in">
+          <div class="exp-topbar">
+            <span class="status-label"><span class="dot"></span>completed</span>
+            <span>05/2025 – 06/2026</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-head">
+              <span class="exp-role">MERN-Stack Developer</span>
+              <span class="exp-company">Go-Mailer Limited</span>
+            </div>
+            <div class="exp-location">Lagos, Nigeria</div>
+            <ul class="exp-bullets">
+              <li>
+                Collaborated on developing full-stack web applications using the
+                MERN stack (MongoDB, Express.js, React, Node.js).
+              </li>
+              <li>
+                Built dynamic and responsive front-end interfaces with React,
+                improving user interactivity and performance.
+              </li>
+              <li>
+                Implemented and tested RESTful APIs using Node.js and Express,
+                supporting core application features and data operations.
+              </li>
+              <li>
+                Collaborated remotely with senior developers in agile sprints —
+                stand-ups, code reviews, and feature planning.
+              </li>
+              <li>
+                Gained hands-on experience deploying and debugging applications
+                in a live environment.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-topbar">
+            <span class="status-label"><span class="dot"></span>completed</span>
+            <span>09/2024 – 04/2025</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-head">
+              <span class="exp-role">Full-stack Engineer</span>
+              <span class="exp-company">Taremtec Ltd</span>
+            </div>
+            <div class="exp-location">United Kingdom (Remote)</div>
+            <ul class="exp-bullets">
+              <li>
+                Developed and maintained scalable full-stack applications using
+                Angular, Express.js, and MongoDB, enhancing performance and UX
+                across web platforms.
+              </li>
+              <li>
+                Implemented responsive, dynamic UI components using PrimeNG for
+                complex forms and data tables, with accessibility in mind.
+              </li>
+              <li>
+                Designed and integrated RESTful APIs to support real-time data
+                transactions and efficient client-server communication.
+              </li>
+              <li>
+                Collaborated in an agile team to deliver features on time,
+                perform code reviews, and continuously improve system
+                architecture.
+              </li>
+              <li>
+                Applied best practices in backend development — data modeling,
+                validation, and error handling — for secure workflows.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-topbar">
+            <span class="status-label"><span class="dot"></span>completed</span>
+            <span>04/2023 – 06/2024</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-head">
+              <span class="exp-role">Software Engineer</span>
+              <span class="exp-company">Technocrat-IT</span>
+            </div>
+            <div class="exp-location">Lagos, Nigeria</div>
+            <ul class="exp-bullets">
+              <li>
+                Built and maintained responsive, scalable web applications using
+                Angular for front-end development.
+              </li>
+              <li>
+                Implemented state management with NgRx to enhance application
+                performance and ensure maintainable code.
+              </li>
+              <li>
+                Leveraged Angular Material and Bootstrap to deliver an
+                intuitive, responsive UI, improving user engagement by 20%.
+              </li>
+              <li>
+                Streamlined development workflows by integrating build tools
+                such as Webpack and version control with Git.
+              </li>
+              <li>
+                Carried out thorough unit testing with Jasmine and Karma,
+                ensuring reliability and scalability of the application.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item fade-in">
+          <div class="exp-topbar">
+            <span class="status-label"><span class="dot"></span>completed</span>
+            <span>03/2017 – 04/2023</span>
+          </div>
+          <div class="exp-body">
+            <div class="exp-head">
+              <span class="exp-role">Fullstack Developer</span>
+              <span class="exp-company">Vaultforte Technologies Limited</span>
+            </div>
+            <div class="exp-location">Lagos, Nigeria</div>
+            <ul class="exp-bullets">
+              <li>
+                Designed and developed modular Express.js microservices handling
+                user registration, event creation, ticket inventory, and payment
+                workflows using MVC architecture.
+              </li>
+              <li>
+                Developed responsive, reusable frontend applications using
+                React.js, TypeScript, and Redux Toolkit — dashboards for event
+                management, ticket booking, and user administration.
+              </li>
+              <li>
+                Built a rigorous testing suite with Mocha and Jest, plus a
+                pre-commit hook environment, reducing production bugs by 60%.
+              </li>
+              <li>
+                Designed a robust PostgreSQL relational schema for complex
+                many-to-many relationships between events, venues, attendees,
+                and waitlists, with migrations and seeding for CI/CD.
+              </li>
+              <li>
+                Leveraged Redis for session management and caching of
+                high-traffic endpoints, reducing database load by 50% during
+                flash sales.
+              </li>
+              <li>
+                Built and documented RESTful APIs using OpenAPI (Swagger),
+                enabling seamless frontend integration and third-party developer
+                access.
+              </li>
+              <li>
+                Integrated Passport.js for Local and JWT authentication, with
+                data validation, sanitisation, and secure coding practices
+                against injection attacks.
+              </li>
+              <li>
+                Optimised frontend performance through code splitting, lazy
+                loading, memoisation, and efficient state management.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-header fade-in">
+        <div>
+          <span class="section-tag">// What I run</span>
+          <h2 class="section-title">Skills & Expertise</h2>
+        </div>
+        <span class="section-note">5 domains monitored</span>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Frontend Development</h3>
+            <span class="skill-badge green">Stable</span>
+          </div>
+          <p class="skill-description">
+            Responsive, interactive interfaces built with modern frameworks —
+            tuned for performance and accessibility.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Angular</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Next.js</span>
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Redux Toolkit</span>
+            <span class="tech-tag">NgRx</span>
+            <span class="tech-tag">PrimeNG</span>
+            <span class="tech-tag">Tailwind</span>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Backend Development</h3>
+            <span class="skill-badge green">Stable</span>
+          </div>
+          <p class="skill-description">
+            Robust APIs and services with scalable architecture and secure
+            authentication.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">Express.js</span>
+            <span class="tech-tag">Django</span>
+            <span class="tech-tag">Nest.js</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">MySQL</span>
+            <span class="tech-tag">MongoDB</span>
+            <span class="tech-tag">Redis</span>
+            <span class="tech-tag">Celery</span>
+            <span class="tech-tag">S3</span>
+            <span class="tech-tag">Passport.js</span>
+            <span class="tech-tag">JWT</span>
+            <span class="tech-tag">OpenAPI / Swagger</span>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Cloud & DevOps</h3>
+            <span class="skill-badge green">Stable</span>
+          </div>
+          <p class="skill-description">
+            Deploying and managing applications with CI/CD pipelines and
+            containerization.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">Jenkins</span>
+            <span class="tech-tag">GitHub Actions</span>
+            <span class="tech-tag">Vercel</span>
+          </div>
+        </div>
+
+        <!-- Featured: Monitoring, Logging & Observability -->
+        <div class="skill-card obs-panel fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Monitoring, Logging & Observability</h3>
+            <span class="skill-badge amber">Live watch</span>
+          </div>
+          <p class="skill-description">
+            I don't ship a service without a way to see inside it — metrics,
+            logs, and traces wired in from day one.
+          </p>
+
+          <div class="obs-metrics">
+            <div class="obs-metric">
+              <div class="metric-label">Uptime (30d)</div>
+              <div class="metric-value green">99.98%</div>
+              <svg
+                class="sparkline"
+                width="100%"
+                height="28"
+                viewBox="0 0 120 28"
+                preserveAspectRatio="none"
+              >
+                <polyline
+                  points="0,20 15,18 30,19 45,10 60,14 75,8 90,12 105,6 120,9"
+                  fill="none"
+                  stroke="#35c56a"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div class="obs-metric">
+              <div class="metric-label">p95 latency</div>
+              <div class="metric-value">142ms</div>
+              <svg
+                class="sparkline"
+                width="100%"
+                height="28"
+                viewBox="0 0 120 28"
+                preserveAspectRatio="none"
+              >
+                <polyline
+                  points="0,10 15,14 30,9 45,16 60,11 75,15 90,9 105,13 120,10"
+                  fill="none"
+                  stroke="#8b96a3"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div class="obs-metric">
+              <div class="metric-label">Error rate</div>
+              <div class="metric-value amber">0.04%</div>
+              <svg
+                class="sparkline"
+                width="100%"
+                height="28"
+                viewBox="0 0 120 28"
+                preserveAspectRatio="none"
+              >
+                <polyline
+                  points="0,22 15,21 30,23 45,20 60,22 75,19 90,21 105,20 120,21"
+                  fill="none"
+                  stroke="#f5a623"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div class="obs-metric">
+              <div class="metric-label">Open alerts</div>
+              <div class="metric-value green">0</div>
+              <svg
+                class="sparkline"
+                width="100%"
+                height="28"
+                viewBox="0 0 120 28"
+                preserveAspectRatio="none"
+              >
+                <polyline
+                  points="0,25 15,25 30,25 45,25 60,25 75,25 90,25 105,25 120,25"
+                  fill="none"
+                  stroke="#35c56a"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="tech-tags">
+            <span class="tech-tag">Prometheus</span>
+            <span class="tech-tag">Grafana</span>
+            <span class="tech-tag">ELK Stack</span>
+            <span class="tech-tag">Datadog</span>
+            <span class="tech-tag">New Relic</span>
+            <span class="tech-tag">Sentry</span>
+            <span class="tech-tag">Jaeger / Zipkin</span>
+            <span class="tech-tag">AWS CloudWatch</span>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in" style="grid-column: 1 / -1">
+          <div class="skill-head">
+            <h3 class="skill-title">Testing in CI/CD Pipelines</h3>
+            <span class="skill-badge green">Passing</span>
+          </div>
+          <p class="skill-description">
+            Every change runs through automated checks before it reaches
+            production — unit, integration, and browser-level coverage, gated by
+            static analysis.
+          </p>
+          <div class="tech-tags">
+            <span class="tech-tag">Selenium</span>
+            <span class="tech-tag">Cypress</span>
+            <span class="tech-tag">Playwright</span>
+            <span class="tech-tag">Jest</span>
+            <span class="tech-tag">Vitest</span>
+            <span class="tech-tag">Mocha</span>
+            <span class="tech-tag">Chai</span>
+            <span class="tech-tag">Jasmine / Karma</span>
+            <span class="tech-tag">PyTest</span>
+            <span class="tech-tag">Testcontainers</span>
+            <span class="tech-tag">SonarQube</span>
+            <span class="tech-tag">Postman</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testing">
+      <div class="section-header fade-in">
+        <div>
+          <span class="section-tag">// Every merge, checked</span>
+          <h2 class="section-title">CI/CD Test Pipeline</h2>
+        </div>
+        <span class="section-note">5 gates before deploy</span>
+      </div>
+      <div class="pipeline fade-in">
+        <div class="pipeline-stage">
+          <div class="stage-icon">✓</div>
+          <div class="stage-label">Lint / SonarQube</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="stage-icon">✓</div>
+          <div class="stage-label">Unit — Jest / PyTest</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="stage-icon">✓</div>
+          <div class="stage-label">Integration — Testcontainers</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="stage-icon">✓</div>
+          <div class="stage-label">E2E — Cypress / Selenium</div>
+        </div>
+        <div class="pipeline-stage">
+          <div class="stage-icon">✓</div>
+          <div class="stage-label">Deploy</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header fade-in">
+        <div>
+          <span class="section-tag">// Deployed services</span>
+          <h2 class="section-title">Featured Projects</h2>
+        </div>
+        <span class="section-note">8 repositories</span>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>edtech</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">PrepJ: JAMB CBT Practice Platform</h3>
+            <p class="project-description">
+              An exam-prep platform for JAMB candidates with CBT-style mock
+              exams, past questions by subject, an AI tutor, quizzes, study
+              groups, rankings, referrals, and subscription billing. React
+              (Vite) frontend with SEO prerendered landing pages, powered by a
+              Django REST API with Celery background tasks, Docker deployment,
+              and social authentication.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://www.prepjasgt.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="project-link"
+                >Live Demo</a
+              >
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>e-commerce</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">E-Commerce Platform</h3>
+            <p class="project-description">
+              A full-featured online marketplace with real-time inventory
+              management, payment processing, and an admin dashboard. Built with
+              React/Next.js and Node.js.
+            </p>
+            <div class="project-links">
+              <a href="https://jespogadget.com" class="project-link"
+                >Live Demo</a
+              >
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>fintech</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">
+              Credit Profile & Dispute Management System
+            </h3>
+            <p class="project-description">
+              A Next.js application for managing credit profiles and disputes
+              with AI-powered letter generation.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Nurudeenbika/Credit_Veto"
+                class="project-link"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>healthcare</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">More Than Just Words — Teletherapy</h3>
+            <p class="project-description">
+              A teletherapy platform for speech-language pathologists to run
+              remote sessions, track progress, and manage client information.
+            </p>
+            <div class="project-links">
+              <a href="https://morethanjustwords.ca/" class="project-link"
+                >Live Demo</a
+              >
+              <a
+                href="https://github.com/Nurudeenbika/More-Than-Just-Words"
+                class="project-link"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>education</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">University CRM</h3>
+            <p class="project-description">
+              A modern university course management system with role-based
+              access control, AI integrations, and real-time features.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Nurudeenbika/university-crm/tree/main/university-crm"
+                class="project-link"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>events</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Event Management System</h3>
+            <p class="project-description">
+              A React Native application for managing events with user
+              registration, ticketing, and real-time updates.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Nurudeenbika/Event-Management-frontend"
+                class="project-link"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>events / mobile</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Event Booking Platform</h3>
+            <p class="project-description">
+              Full-stack event booking system with a React Native mobile app and
+              a web-based Admin Portal — role-based access, JWT auth, seat-limit
+              enforcement, and revenue/popular-events analytics via MongoDB
+              aggregation pipelines. Deployed on Render and Expo Go.
+            </p>
+            <div class="project-links">
+              <a href="#" class="project-link">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card fade-in">
+          <div class="project-topbar">
+            <span class="status-label"
+              ><span class="dot"></span>operational</span
+            >
+            <span>infra</span>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">URL Shortener Microservice</h3>
+            <p class="project-description">
+              A scalable microservice for generating and managing short URLs
+              with analytics and security features. Built with Node.js, Express,
+              and MongoDB.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/Nurudeenbika/FCC-urlshortner"
+                class="project-link"
+                >GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-header fade-in">
+        <div>
+          <span class="section-tag">// Background & credentials</span>
+          <h2 class="section-title">Education & Certifications</h2>
+        </div>
+        <span class="section-note">3 degrees/diplomas · 6 certifications</span>
+      </div>
+
+      <div class="edu-cert-grid">
+        <div class="skill-card fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Education</h3>
+            <span class="skill-badge green">Verified</span>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">
+              Bachelor's Degree in Computer Science (In View)
+            </div>
+            <div class="edu-meta">
+              University of the People <span class="sep">·</span> Colorado, USA
+              <span class="sep">·</span> 2024 – present
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">Diploma in ALX Software Engineering</div>
+            <div class="edu-meta">
+              Holberton School <span class="sep">·</span> 2022 – 2023
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">
+              Bachelor's Degree in Chemical Engineering
+            </div>
+            <div class="edu-meta">
+              University of Benin <span class="sep">·</span> Benin, Nigeria
+              <span class="sep">·</span> 2015 – 2020
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-head">
+            <h3 class="skill-title">Certifications</h3>
+            <span class="skill-badge green">Verified</span>
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span
+              ><strong>ALX Software Engineering</strong> — ALX Africa (one-year
+              diploma, specialization in Backend development)</span
+            >
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span
+              ><strong>MERN (Fullstack) Certification</strong> — Fullstackopen,
+              University of Helsinki</span
+            >
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span
+              ><strong>Containers Certification</strong> — Fullstackopen,
+              University of Helsinki</span
+            >
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span
+              ><strong>Backend Development and APIs</strong> —
+              FreeCodeCamp</span
+            >
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span><strong>Responsive Web Design</strong> — FreeCodeCamp</span>
+          </div>
+          <div class="cert-item">
+            <span class="dot"></span>
+            <span><strong>Relational Database</strong> — FreeCodeCamp</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-panel fade-in">
+        <h2 class="contact-title">Let's build something reliable</h2>
+        <p class="contact-description">
+          Whether you're launching a startup, scaling an enterprise system, or
+          need someone who cares as much about what happens after deploy as
+          before it — I'm here to help.
+        </p>
+        <div class="contact-methods">
+          <div class="contact-method">📧 nurudeenbika@email.com</div>
+          <div class="contact-method">📱 +234 814 776 4073</div>
+        </div>
+        <div class="social-links">
+          <a href="https://x.com/Nurudeenbika01" class="social-link">𝕏</a>
+          <a
+            href="https://www.linkedin.com/in/nurudeen-hassan/"
+            class="social-link"
+            >in</a
+          >
+          <a href="https://wa.me/2348147764073" class="social-link">✆</a>
+          <a href="https://github.com/nurudeenbika" class="social-link">gh</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2026 Nurudeen Osikpemhi Hassan</p>
+    </footer>
+
+    <script>
+      // Mobile nav toggle
+      const navToggle = document.getElementById("nav-toggle");
+      const navLinks = document.getElementById("nav-links");
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", () => {
+          const isOpen = navLinks.classList.toggle("open");
+          navToggle.classList.toggle("open", isOpen);
+          navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+        navLinks.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("open");
+            navToggle.classList.remove("open");
+            navToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target)
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // Fade-in on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -80px 0px" },
+      );
+      document
+        .querySelectorAll(".fade-in")
+        .forEach((el) => observer.observe(el));
+
+      // Live session "uptime" ticker — the signature touch
+      const start = Date.now();
+      const uptimeEl = document.getElementById("nav-uptime");
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+      function tick() {
+        const elapsed = Math.floor((Date.now() - start) / 1000);
+        const h = Math.floor(elapsed / 3600);
+        const m = Math.floor((elapsed % 3600) / 60);
+        const s = elapsed % 60;
+        if (uptimeEl)
+          uptimeEl.textContent = `· uptime ${pad(h)}:${pad(m)}:${pad(s)}`;
+      }
+      setInterval(tick, 1000);
+      tick();
+
+      // Live clock in hero panel
+      const clockEl = document.getElementById("hero-clock");
+      function updateClock() {
+        if (clockEl)
+          clockEl.textContent = new Date().toLocaleTimeString("en-GB");
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+    </script>
+  </body>
+</html>
